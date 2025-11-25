@@ -1,20 +1,4 @@
 
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
-
-
-This contains everything you need to run your app locally.
-
-
-## Run Locally
-
-**Prerequisites:**  
-- Node.js 20+  
-- A Supabase project with anon/public API access  
-- A Gemini API key (for AI blurbs in the shop cards)
-
 ### 1. Configure environment variables
 
 Create a `.env.local` file in the project root:
