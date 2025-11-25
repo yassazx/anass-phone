@@ -10,10 +10,8 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
       },
       plugins: [react()],
-      define: {
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
-      },
+      // Note: VITE_ prefixed env vars are automatically exposed to client code via import.meta.env
+      // No need to define them here - they're available at build time
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '.'),

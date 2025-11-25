@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Product } from '../types';
 import { useStore } from '../context/StoreContext';
-import { Sparkles } from 'lucide-react';
-import { generateProductBlurb } from '../services/geminiService';
 
 interface ProductCardProps {
   product: Product;
@@ -10,19 +8,7 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useStore();
-  const [aiDescription, setAiDescription] = useState<string | null>(null);
-  const [loadingAi, setLoadingAi] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-
-  const handleAskStylist = async (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (aiDescription) return;
-    
-    setLoadingAi(true);
-    const blurb = await generateProductBlurb(product.name, product.category);
-    setAiDescription(blurb);
-    setLoadingAi(false);
-  };
 
   return (
     <div 
@@ -86,29 +72,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             )}
           </div>
         )}
-        
-        {/* AI Stylist Note */}
-        <div className="mt-auto min-h-[2.5rem]">
-            {!aiDescription && !loadingAi && (
-                <button 
-                    onClick={handleAskStylist}
-                    className="flex items-center text-xs text-gold-600 hover:text-gold-300 transition-colors"
-                >
-                    <Sparkles size={12} className="mr-1" />
-                    AI Description
-                </button>
-            )}
-            
-            {loadingAi && (
-                <span className="text-xs text-gold-500 animate-pulse">Generating info...</span>
-            )}
-
-            {aiDescription && (
-                <div className="relative p-2 bg-onyx-800 border-l-2 border-gold-600 italic">
-                     <p className="text-[10px] text-gray-300 leading-relaxed">"{aiDescription}"</p>
-                </div>
-            )}
-        </div>
       </div>
     </div>
   );
